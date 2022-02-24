@@ -1,0 +1,8 @@
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    background-color: black;
+    color: aliceblue;
+    z-index: 2;
+    justify-content: space-evenly;
+}
