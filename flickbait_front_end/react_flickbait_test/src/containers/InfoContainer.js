@@ -4,14 +4,14 @@ import Rating from "../components/Rating";
 const InfoContainer = () => {
 
     const [webPages, setWebPages] = useState([]);
-    const [selectedWebPage, setSelectedWebPage] = useState(null);
+    const [selectedWebPage, setSelectedWebPage] = useState([]);
 
 
     let url = 'http://soundcloud.com/kleyna'
     const getUrl = function(){
-      fetch(`http://localhost:8080/webpages?url=http://soundcloud.com/kleyna`)
+      fetch(`http://localhost:8080/webpages?url=${url}`)
       .then(res => res.json())
-      .then(selectedWebPage => setSelectedWebPage(selectedWebPage))
+      .then(selectedWebPage => setSelectedWebPage(selectedWebPage[0]))
   }
    
 
@@ -34,8 +34,7 @@ const InfoContainer = () => {
     return (
         <>
         <p>blah</p>
-        {/* <Rating selectedWebPage = {selectedWebPage}/> */}
-        {selectedWebPage.url}
+        <Rating selectedWebPage={selectedWebPage}/>
         </>
     )
 }
