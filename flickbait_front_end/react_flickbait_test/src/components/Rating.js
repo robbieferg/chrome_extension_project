@@ -1,10 +1,11 @@
 
 import React from "react";
 
-const Rating = () => {
+const Rating = ({selectedWebPage}) => {
     
 
-    let url = "http://myanimelist.net";
+
+    // let url = "http://myanimelist.net";
     
     // chrome.tabs.query({active: true, currentWindow: true}, tabs => {
     // //     let url = tabs[0].url;
@@ -13,7 +14,8 @@ const Rating = () => {
 
     return (
         <>
-        <p>{url}</p>
+        <p>{selectedWebPage}</p>
+        {/* <p>{url}</p> */}
         </>
     )
 }
