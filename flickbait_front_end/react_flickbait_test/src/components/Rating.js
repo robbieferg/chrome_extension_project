@@ -4,11 +4,12 @@ import React from "react";
 const Rating = ({selectedWebPage}) => {
     
 
-    const rating = selectedWebPage
+    const rating = selectedWebPage.upvotes / selectedWebPage.numberOfVotes;
 
     return (
         <>
-        <p>{selectedWebPage}</p>
+        <p>{selectedWebPage.url}</p>
+        <p>{rating}</p>
         {/* <p>{url}</p> */}
         </>
     )
