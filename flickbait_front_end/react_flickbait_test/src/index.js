@@ -14,7 +14,7 @@ document.body.parentNode.insertBefore(insertionPoint, document.body);
 
 ReactDOM.render(
   <React.StrictMode>
-    <FlickBait/>
+    {/* <FlickBait/> */}
     <InfoContainer/>
   </React.StrictMode>,
   insertionPoint

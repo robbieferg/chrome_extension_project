@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Rating from "../components/Rating";
+import "./InfoContainer.css"
 
 const InfoContainer = () => {
 
@@ -33,8 +34,10 @@ const InfoContainer = () => {
 
     return (
         <>
-        <p>blah</p>
-        <Rating selectedWebPage={selectedWebPage}/>
+        <div className="navbar-container">
+          <p>blah</p>
+          <Rating selectedWebPage={selectedWebPage}/>
+        </div>
         </>
     )
 }
