@@ -1,8 +1,15 @@
+body {
+    background-color: dimgray;
+}
+
 .navbar-container {
+    height: 50px;
     display: flex;
     flex-direction: row;
-    background-color: black;
+    background: rgb(238,156,167);
+    background: linear-gradient(90deg, rgba(238,156,167,1) 0%, rgba(255,221,225,1) 100%);
     color: aliceblue;
     z-index: 2;
     justify-content: space-evenly;
+    align-items: center;
 }
