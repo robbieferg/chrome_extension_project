@@ -38,8 +38,13 @@ const handleChange = function(event){
     setStateUser(copiedUser)
 }
 
+const handleSubmit = function(event){
+    event.preventDefault();
+    onCreate(stateWebPage);
+}
+
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <select>
                 <option value="upvote" key="up">⬆</option>
                 <option value="downvote" key="down">⬇</option>

@@ -30,6 +30,27 @@ const InfoContainer = () => {
             
       //   })
       // }
+
+      const handlePost = function(selectedWebPage){
+        const request = new Request();
+        request.post("/webpages", selectedWebPage)
+        .then(() => window.location = '/webpages')
+      }
+      const handlePost = function(selectedWebPage){
+        const request = new Request();
+        request.post("/webpages", selectedWebPage)
+        .then(() => window.location = '/webpages')
+      }
+      const handlePost = function(selectedWebPage){
+        const request = new Request();
+        request.post("/webpages", selectedWebPage)
+        .then(() => window.location = '/webpages')
+      }
+      const handlePost = function(selectedWebPage){
+        const request = new Request();
+        request.post("/webpages", selectedWebPage)
+        .then(() => window.location = '/webpages')
+      }
     
       useEffect(()=>{
         getUrl()
@@ -38,7 +59,8 @@ const InfoContainer = () => {
     return (
         <>
         <div className="navbar-container">
-          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : "ERR: Webpage not Registered"}
+          
+          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : <Form selectedWebPage={selectedWebPage} onCreate={handlePost}/>}
           
         </div>
         </>

@@ -281,14 +281,14 @@ public class DataLoader implements ApplicationRunner {
         messenger.addVote(sarahV6);
         webPageRepository.save(messenger);
 
-        Comment jackComment1 = new Comment(jack, "Did you know that I make music?", date, soundCloud);
+        Comment jackComment1 = new Comment(jack, "Did you know that I make music?", soundCloud);
         commentRepository.save(jackComment1);
         jack.addComment(jackComment1);
         userRepository.save(jack);
         soundCloud.addComment(jackComment1);
         webPageRepository.save(soundCloud);
 
-        Comment tamerComment1 = new Comment(tamer, "I am not a loser", date, guardian);
+        Comment tamerComment1 = new Comment(tamer, "I am not a loser", guardian);
         commentRepository.save(tamerComment1);
         tamer.addComment(tamerComment1);
         userRepository.save(tamer);
