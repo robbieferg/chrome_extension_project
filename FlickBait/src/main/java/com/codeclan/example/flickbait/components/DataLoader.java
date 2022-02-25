@@ -38,22 +38,22 @@ public class DataLoader implements ApplicationRunner {
 
         Date date = new Date();
 
-        WebPage soundCloud = new WebPage("http://soundcloud.com/kleyna");
+        WebPage soundCloud = new WebPage("soundcloud.com/kleyna");
         webPageRepository.save(soundCloud);
 
-        WebPage guardian = new WebPage("http://theguardian.com");
+        WebPage guardian = new WebPage("theguardian.com/");
         webPageRepository.save(guardian);
 
-        WebPage mal = new WebPage("http://myanimelist.net");
+        WebPage mal = new WebPage("myanimelist.net/");
         webPageRepository.save(mal);
 
-        WebPage newGrounds = new WebPage("https://www.newgrounds.com/");
+        WebPage newGrounds = new WebPage("www.newgrounds.com/");
         webPageRepository.save(newGrounds);
 
-        WebPage stackOverflow = new WebPage("http://www.stackoverflow.com");
+        WebPage stackOverflow = new WebPage("www.stackoverflow.com/");
         webPageRepository.save(stackOverflow);
 
-        WebPage messenger = new WebPage("http://www.messenger.com");
+        WebPage messenger = new WebPage("www.messenger.com/");
         webPageRepository.save(messenger);
 
         User jack = new User("Jack", "jackcogan97@yahoo.co.uk");

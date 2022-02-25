@@ -9,8 +9,8 @@ const Rating = ({selectedWebPage}) => {
     return (
         <>
         <p>{selectedWebPage.url}</p>
+        <p>{selectedWebPage.upvotes}</p>
         <p>{rating}</p>
-        {/* <p>{url}</p> */}
         </>
     )
 }

@@ -8,9 +8,11 @@ const InfoContainer = () => {
     const [selectedWebPage, setSelectedWebPage] = useState([]);
 
 
-    let url = 'http://soundcloud.com/kleyna'
+    let url = window.location.host;
+    let urlLink = window.location.pathname;
+
     const getUrl = function(){
-      fetch(`http://localhost:8080/webpages?url=${url}`)
+      fetch(`http://localhost:8080/webpages?url=${url}${urlLink}`)
       .then(res => res.json())
       .then(selectedWebPage => setSelectedWebPage(selectedWebPage[0]))
   }
@@ -30,13 +32,12 @@ const InfoContainer = () => {
     
       useEffect(()=>{
         getUrl()
-      }, [])
+      }, [selectedWebPage])
 
     return (
         <>
         <div className="navbar-container">
-          <p>blah</p>
-          <Rating selectedWebPage={selectedWebPage}/>
+          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : "ERR: Webpage not Registered"}
         </div>
         </>
     )
