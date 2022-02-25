@@ -38,6 +38,7 @@ const InfoContainer = () => {
         <>
         <div className="navbar-container">
           {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : "ERR: Webpage not Registered"}
+          
         </div>
         </>
     )
