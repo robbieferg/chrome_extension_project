@@ -30,10 +30,10 @@ public class Comment {
     @JoinColumn(name = "web_page_id")
     private WebPage webPage;
 
-    public Comment(User author, String text, Date dateAndTime, WebPage webPage) {
+    public Comment(User author, String text, WebPage webPage) {
         this.author = author;
         this.text = text;
-        this.dateAndTime = dateAndTime;
+        this.dateAndTime = new Date();
         this.webPage = webPage;
     }
 
