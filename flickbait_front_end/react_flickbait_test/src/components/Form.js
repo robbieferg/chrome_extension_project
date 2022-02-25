@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Form = ({selectedWebPage, user, url, urlLink}) => {
+const VoteForm = ({url, urlLink, onWebPageCreate, onUserCreate, onVoteCreate, onCommentCreate}) => {
 
 const [stateWebPage, setStateWebPage] = useState(
     {
@@ -15,21 +15,21 @@ const [stateUser, setStateUser] = useState(
     }
 )
 
-const [stateComment, setStateComment] = useState(
-    {
-        author: null,
-        text: "",
-        webPage: null
-    }
-)
-
 const [stateVote, setStateVote] = useState(
     {
-        isUpVote: false,
+        isUpVote: null,
         user: null,
         webPage: null
     }
 )
+
+    const [stateComment, setStateComment] = useState(
+        {
+            author: null,
+            text: "",
+            webPage: null
+        }
+    )
 
 const handleChange = function(event){
     let propertyName = event.target.name;
@@ -40,7 +40,11 @@ const handleChange = function(event){
 
 const handleSubmit = function(event){
     event.preventDefault();
-    onCreate(stateWebPage);
+    if (stateWebPage.id){
+        onUpdate(stateWebPage)
+    } else {
+        onCreate(stateWebPage);
+    }
 }
 
     return (
@@ -49,13 +53,11 @@ const handleSubmit = function(event){
                 <option value="upvote" key="up">⬆</option>
                 <option value="downvote" key="down">⬇</option>
             </select>
-            <input type="text" name="comment" id="comment-box"/>\
-            <input type="email" name="email" onChange={handleChange}/>
-            <input type="text" name="name" onChange={handleChange}/>
-            <input type="text" value={url, urlLink} hidden/>
             <button type="submit">Save</button>
         </form>
+
+
     );
 }
  
-export default Form;
+export default VoteForm;

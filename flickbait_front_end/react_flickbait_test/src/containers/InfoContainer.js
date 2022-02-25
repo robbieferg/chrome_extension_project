@@ -8,7 +8,6 @@ const InfoContainer = () => {
     const [webPages, setWebPages] = useState([]);
     const [selectedWebPage, setSelectedWebPage] = useState([]);
 
-
     let url = window.location.host;
     let urlLink = window.location.pathname;
 
@@ -31,25 +30,28 @@ const InfoContainer = () => {
       //   })
       // }
 
-      const handlePost = function(selectedWebPage){
+      const handleWebPagePost = function(webPage){
         const request = new Request();
-        request.post("/webpages", selectedWebPage)
+        request.post("/webpages", webPage)
         .then(() => window.location = '/webpages')
       }
-      const handlePost = function(selectedWebPage){
+
+      const handleVotePost = function(vote){
         const request = new Request();
-        request.post("/webpages", selectedWebPage)
-        .then(() => window.location = '/webpages')
+        request.post("/votes", vote)
+        .then(() => window.location = '/votes')
       }
-      const handlePost = function(selectedWebPage){
+
+      const handleCommentPost = function(comment){
         const request = new Request();
-        request.post("/webpages", selectedWebPage)
-        .then(() => window.location = '/webpages')
+        request.post("/comments", comment)
+        .then(() => window.location = '/comments')
       }
-      const handlePost = function(selectedWebPage){
+
+      const handleUserPost = function(user){
         const request = new Request();
-        request.post("/webpages", selectedWebPage)
-        .then(() => window.location = '/webpages')
+        request.post("/users", user)
+        .then(() => window.location = '/users')
       }
     
       useEffect(()=>{
@@ -60,7 +62,7 @@ const InfoContainer = () => {
         <>
         <div className="navbar-container">
           
-          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : <Form selectedWebPage={selectedWebPage} onCreate={handlePost}/>}
+          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : <Form url={url} urlLink={urlLink} onWebPageCreate={handleWebPagePost} onUserCreate={handleUserPost} onVoteCreate={handleVotePost} onCommentCreate={handleCommentPost}/>}
           
         </div>
         </>
