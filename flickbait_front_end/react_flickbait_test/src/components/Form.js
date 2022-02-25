@@ -1,27 +1,29 @@
 import { useState } from "react";
 
-const VoteForm = ({url, urlLink, onWebPageCreate, onUserCreate, onVoteCreate, onCommentCreate}) => {
+const Form = ({url, urlLink, onWebPageCreate, onUserCreate, onVoteCreate, onCommentCreate}) => {
+    
+    const fullUrl = url + urlLink
 
-const [stateWebPage, setStateWebPage] = useState(
-    {
-        url: {url} + {urlLink}
-    }
-)
+    const [stateWebPage, setStateWebPage] = useState(
+        {
+            url: fullUrl
+        }
+    )
 
-const [stateUser, setStateUser] = useState(
-    {
-        name: "",
-        email: ""
-    }
-)
+    const [stateUser, setStateUser] = useState(
+        {
+            name: "",
+            email: ""
+        }
+    )
 
-const [stateVote, setStateVote] = useState(
-    {
-        isUpVote: null,
-        user: null,
-        webPage: null
-    }
-)
+    const [stateVote, setStateVote] = useState(
+        {
+            isUpVote: null,
+            user: null,
+            webPage: null
+        }
+    )
 
     const [stateComment, setStateComment] = useState(
         {
@@ -31,21 +33,20 @@ const [stateVote, setStateVote] = useState(
         }
     )
 
-const handleChange = function(event){
-    let propertyName = event.target.name;
-    let copiedUser = {...stateUser}
-    copiedUser[propertyName] = event.target.value;
-    setStateUser(copiedUser)
-}
-
-const handleSubmit = function(event){
-    event.preventDefault();
-    if (stateWebPage.id){
-        onUpdate(stateWebPage)
-    } else {
-        onCreate(stateWebPage);
+    const handleChange = function(event){
+        let propertyName = event.target.name;
+        let copiedUser = {...stateUser}
+        copiedUser[propertyName] = event.target.value;
+        setStateUser(copiedUser)
     }
-}
+
+    const handleSubmit = function(event){
+        event.preventDefault();
+            onWebPageCreate(stateWebPage);
+            onUserCreate(stateUser);
+            onCommentCreate(stateComment);
+            onVoteCreate(stateVote);
+    }
 
     return (
         <form onSubmit={handleSubmit}>
@@ -53,6 +54,10 @@ const handleSubmit = function(event){
                 <option value="upvote" key="up">⬆</option>
                 <option value="downvote" key="down">⬇</option>
             </select>
+            <input type="text" name="comment" placeholder="type a comment(optional)" id="comment-box"/>
+            <input type="email" name="email" placeholder="type email" onChange={handleChange}/>
+            <input type="text" name="name" placeholder="type name" onChange={handleChange}/>
+            <input type="text" value={fullUrl} hidden/>
             <button type="submit">Save</button>
         </form>
 
@@ -60,4 +65,4 @@ const handleSubmit = function(event){
     );
 }
  
-export default VoteForm;
+export default Form;

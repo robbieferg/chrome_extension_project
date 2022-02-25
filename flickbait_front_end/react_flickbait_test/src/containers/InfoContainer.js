@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Rating from "../components/Rating";
 import "./InfoContainer.css"
 import Request from "../helpers/request";
+import Form from "../components/Form";
 
 const InfoContainer = () => {
 
