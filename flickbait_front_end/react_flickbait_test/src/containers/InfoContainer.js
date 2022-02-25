@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Rating from "../components/Rating";
 import "./InfoContainer.css"
+import Request from "../helpers/request";
 
 const InfoContainer = () => {
 
