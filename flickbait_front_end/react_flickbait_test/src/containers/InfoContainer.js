@@ -7,6 +7,8 @@ import Form from "../components/Form";
 const InfoContainer = () => {
 
     const [webPages, setWebPages] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [votes, setVotes] = useState([]);
     const [selectedWebPage, setSelectedWebPage] = useState([]);
 
     let url = window.location.host;
@@ -19,41 +21,24 @@ const InfoContainer = () => {
   }
    
 
-    // const requestAll = function(){
-    //     const request = new Request();
-    //     const webPagePromise = request.get('/webpages')
-        
-    
-      //   Promise.all([webPagePromise])
-      //   .then((data) => {
-      //       setWebPages(data[0]);
-            
-      //   })
-      // }
-
       const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
-        .then(() => window.location = 'http://www.localhost:8080/webpages')
+        // .then(() => window.location = 'http://www.localhost:8080/webpages')
       }
 
       const handleVotePost = function(vote){
         const request = new Request();
         request.post("http://www.localhost:8080/votes", vote)
-        .then(() => window.location = 'http://www.localhost:8080/votes')
+        // .then(() => window.location = 'http://www.localhost:8080/votes')
       }
 
       const handleCommentPost = function(comment){
         const request = new Request();
         request.post("http://www.localhost:8080/comments", comment)
-        .then(() => window.location = 'http://www.localhost:8080/comments')
+        // .then(() => window.location = 'http://www.localhost:8080/comments')
       }
 
-      const handleUserPost = function(user){
-        const request = new Request();
-        request.post("http://www.localhost:8080/users", user)
-        .then(() => window.location = 'http://www.localhost:8080/users')
-      }
     
       useEffect(()=>{
         getUrl()
@@ -63,7 +48,7 @@ const InfoContainer = () => {
         <>
         <div className="navbar-container">
           
-          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : <Form url={url} urlLink={urlLink} onWebPageCreate={handleWebPagePost} onUserCreate={handleUserPost} onVoteCreate={handleVotePost} onCommentCreate={handleCommentPost}/>}
+          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : <Form url={url} urlLink={urlLink} onWebPageCreate={handleWebPagePost} onVoteCreate={handleVotePost} onCommentCreate={handleCommentPost}/>}
           
         </div>
         </>

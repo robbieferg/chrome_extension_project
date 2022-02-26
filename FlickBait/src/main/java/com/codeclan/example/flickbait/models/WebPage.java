@@ -19,16 +19,6 @@ public class WebPage {
     @Column(name = "url")
     private String url;
 
-    @JsonBackReference
-    @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinTable(
-            name = "users_pages_rated",
-            joinColumns = {@JoinColumn(name = "web_page_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}
-
-    )
-    private List<User> users;
 
     @JsonBackReference
     @OneToMany(mappedBy = "webPage", fetch = FetchType.LAZY)
@@ -49,7 +39,6 @@ public class WebPage {
 
     public WebPage(String url) {
         this.url = url;
-        this.users = new ArrayList<User>();
         this.votes = new ArrayList<Vote>();
         this.averageRating = 0.0;
         this.comments = new ArrayList<Comment>();
@@ -92,13 +81,7 @@ public class WebPage {
         this.url = url;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 
     public List<Vote> getVotes() {
         return votes;
@@ -152,7 +135,5 @@ public class WebPage {
         this.comments.add(comment);
     }
 
-    public void addUser(User user) {
-        this.users.add(user);
-    }
+
 }
