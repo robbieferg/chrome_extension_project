@@ -14,10 +14,8 @@ public class Comment {
     @Column(name = "id")
     private Long id;
 
-    @JsonIgnoreProperties({"comments"})
-    @ManyToOne
-    @JoinColumn(name = "author_id", nullable = false)
-    private User author;
+    @Column(name = "author")
+    private String author;
 
     @Column(name = "text")
     private String text;
@@ -30,7 +28,7 @@ public class Comment {
     @JoinColumn(name = "web_page_id")
     private WebPage webPage;
 
-    public Comment(User author, String text, WebPage webPage) {
+    public Comment(String author, String text, WebPage webPage) {
         this.author = author;
         this.text = text;
         this.dateAndTime = new Date();
@@ -48,11 +46,11 @@ public class Comment {
         this.id = id;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

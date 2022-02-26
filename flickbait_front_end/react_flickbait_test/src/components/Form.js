@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Form = ({ url, urlLink, onWebPageCreate, onUserCreate, onVoteCreate, onCommentCreate }) => {
+const Form = ({ url, urlLink, onWebPageCreate, onVoteCreate, onCommentCreate }) => {
 
   const fullUrl = url + urlLink
 
@@ -10,54 +10,60 @@ const Form = ({ url, urlLink, onWebPageCreate, onUserCreate, onVoteCreate, onCom
     }
   )
 
-  const [stateUser, setStateUser] = useState(
-    {
-      name: "",
-      email: ""
-    }
-  )
 
   const [stateVote, setStateVote] = useState(
     {
-      isUpVote: null,
-      user: null,
-      webPage: null
+      isUpVote: false,
+      webPage: stateWebPage
     }
   )
 
   const [stateComment, setStateComment] = useState(
     {
-      author: null,
+      author: "",
       text: "",
-      webPage: null
+      webPage: stateWebPage
     }
   )
 
-  const handleChange = function (event) {
-    let propertyName = event.target.name;
-    let copiedUser = { ...stateUser }
-    copiedUser[propertyName] = event.target.value;
-    setStateUser(copiedUser)
+ 
+
+  const handleVoteChange = function(event) {
+      const vote = event.target.value;
+      let copiedVote = { ...stateVote }
+      let isUpVote = true;
+      
+      if(vote == "upvote") {
+          copiedVote[isUpVote] = true;
+      }
+      else {
+          copiedVote[isUpVote] = false;
+      }
+      setStateVote(copiedVote);
+  }
+
+  const handleCommentChange = function(event) {
+      const text = event.target.value;
+      let copiedComment = { ...stateComment }
+      copiedComment[text] = text;
   }
 
   const handleSubmit = function (event) {
     event.preventDefault();
     onWebPageCreate(stateWebPage);
-    onUserCreate(stateUser);
-    onCommentCreate(stateComment);
-    onVoteCreate(stateVote);
+    // onUserCreate(stateUser);
+    // onCommentCreate(stateComment);
+    // onVoteCreate(stateVote);
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <select>
+      <select onChange={handleVoteChange}>
         <option value="upvote" key="up">⬆</option>
         <option value="downvote" key="down">⬇</option>
       </select>
-      <input type="text" name="comment" placeholder="type a comment(optional)" id="comment-box" />
-      <input type="email" name="email" placeholder="type email" onChange={handleChange} />
-      <input type="text" name="name" placeholder="type name" onChange={handleChange} />
-      <input type="text" value={fullUrl} hidden />
+      <input type="text" name="name" placeholder="type name"/>
+      <input type="text" value={fullUrl} />
       <button type="submit">Save</button>
     </form>
   );
