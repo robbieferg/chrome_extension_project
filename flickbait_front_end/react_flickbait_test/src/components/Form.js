@@ -57,15 +57,18 @@ const Form = ({ url, urlLink, onWebPageCreate, onVoteCreate, onCommentCreate }) 
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <select onChange={handleVoteChange}>
-        <option value="upvote" key="up">⬆</option>
-        <option value="downvote" key="down">⬇</option>
-      </select>
-      <input type="text" name="name" placeholder="type name"/>
-      <input type="text" value={fullUrl} />
-      <button type="submit">Save</button>
-    </form>
+    <div>
+      <script src="http://localhost:8097"></script>
+      <form onSubmit={handleSubmit}>
+        <select onChange={handleVoteChange}>
+          <option value="upvote" key="up">⬆</option>
+          <option value="downvote" key="down">⬇</option>
+        </select>
+        <input type="text" name="name" placeholder="type name"/>
+        <input type="text" value={fullUrl} />
+        <button type="submit">Save</button>
+      </form>
+    </div>
   );
 }
 

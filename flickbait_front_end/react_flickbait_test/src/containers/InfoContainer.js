@@ -24,19 +24,19 @@ const InfoContainer = () => {
       const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
-        // .then(() => window.location = 'http://www.localhost:8080/webpages')
+        .then(() => window.location.reload())
       }
 
       const handleVotePost = function(vote){
         const request = new Request();
         request.post("http://www.localhost:8080/votes", vote)
-        // .then(() => window.location = 'http://www.localhost:8080/votes')
+        .then(() => window.location.reload())
       }
 
       const handleCommentPost = function(comment){
         const request = new Request();
         request.post("http://www.localhost:8080/comments", comment)
-        // .then(() => window.location = 'http://www.localhost:8080/comments')
+        .then(() => window.location.reload())
       }
 
     
