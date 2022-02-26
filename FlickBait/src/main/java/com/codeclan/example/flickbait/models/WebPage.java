@@ -1,6 +1,7 @@
 package com.codeclan.example.flickbait.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -20,14 +21,14 @@ public class WebPage {
     private String url;
 
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"webPage"})
     @OneToMany(mappedBy = "webPage", fetch = FetchType.LAZY)
     private List<Vote> votes;
 
     @Column(name = "average_rating")
     private double averageRating;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"webPage"})
     @OneToMany(mappedBy = "webPage", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
@@ -107,9 +108,9 @@ public class WebPage {
         this.comments = comments;
     }
 
-    public int getNumberOfVotes() {
-        return this.getVotes().size();
-    }
+//    public int getNumberOfVotes() {
+//        return this.getVotes().size();
+//    }
 
     public void addVote(Vote vote) {
         this.votes.add(vote);
@@ -122,10 +123,10 @@ public class WebPage {
 
     }
 
-    public double calculateAverageRating() {
-        int totalVotes = this.getNumberOfVotes();
-        return this.upvotes / totalVotes;
-    }
+//    public double calculateAverageRating() {
+//        int totalVotes = this.getNumberOfVotes();
+//        return this.upvotes / totalVotes;
+//    }
 
     public int getNumberOfComments(Comment comment) {
         return this.getComments().size();

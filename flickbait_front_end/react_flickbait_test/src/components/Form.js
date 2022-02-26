@@ -63,7 +63,7 @@ const Form = ({ url, urlLink, onWebPageCreate, onVoteCreate, onCommentCreate }) 
         <option value="downvote" key="down">⬇</option>
       </select>
       <input type="text" name="name" placeholder="type name"/>
-      <input type="text" value={fullUrl} hidden />
+      <input type="text" value={fullUrl} />
       <button type="submit">Save</button>
     </form>
   );
