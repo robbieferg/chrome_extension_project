@@ -14,6 +14,8 @@ const InfoContainer = () => {
     let url = window.location.host;
     let urlLink = window.location.pathname;
 
+    const fullUrl = url + urlLink;
+
     const getUrl = function(){
       fetch(`http://localhost:8080/webpages?url=${url}${urlLink}`)
       .then(res => res.json())
@@ -23,7 +25,7 @@ const InfoContainer = () => {
       const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
-        .then(() => window.location.reload())
+        // .then(() => window.location.reload())
       }
 
       const handleVotePost = function(vote){
@@ -35,14 +37,28 @@ const InfoContainer = () => {
       const handleCommentPost = function(comment){
         const request = new Request();
         request.post("http://www.localhost:8080/comments", comment)
-        .then(() => window.location.reload())
+        // .then(() => window.location.reload())
       }
 
       const handleFullPost = (webpage, isUpVote, comment) => {
-        handleWebPagePost(webpage);
-        handleCommentPost(comment);
-        handleVotePost(isUpVote);
+        handleWebPagePost(webpage)
+        .then(
+          handleCommentPost(
+            {
+              comment : comment,
+              webPage : {
+                url: fullUrl
+              }
+            }
+          )
+        )
+        .then(
+          handleVotePost(isUpVote)
+        )
       }
+      // useEffect(() => {
+      //   handleWebPagePost(fullUrl)
+      // },[])
 
       useEffect(()=>{
         getUrl()
