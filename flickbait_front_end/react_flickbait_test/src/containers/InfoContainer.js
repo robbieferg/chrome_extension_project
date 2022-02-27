@@ -33,26 +33,26 @@ const InfoContainer = () => {
 
       const handleWebPagePost = function(webPage){
         const request = new Request();
-        request.post("/webpages", webPage)
-        .then(() => window.location = '/webpages')
+        request.post("http://localhost:8080/webpages", webPage)
+        // .then(() => window.location = '/webpages')
       }
 
       const handleVotePost = function(vote){
         const request = new Request();
-        request.post("/votes", vote)
-        .then(() => window.location = '/votes')
+        request.post("http://localhost:8080/votes", vote)
+        // .then(() => window.location = '/votes')
       }
 
       const handleCommentPost = function(comment){
         const request = new Request();
-        request.post("/comments", comment)
-        .then(() => window.location = '/comments')
+        request.post("http://localhost:8080/comments", comment)
+        // .then(() => window.location = '/comments')
       }
 
       const handleUserPost = function(user){
         const request = new Request();
-        request.post("/users", user)
-        .then(() => window.location = '/users')
+        request.post("http://localhost:8080/users", user)
+        // .then(() => window.location = '/users')
       }
     
       useEffect(()=>{

@@ -1,6 +1,7 @@
 package com.codeclan.example.flickbait.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "web_pages")
+@Table(name = "webpages")
 public class WebPage {
 
     @Id
@@ -19,25 +20,15 @@ public class WebPage {
     @Column(name = "url")
     private String url;
 
-    @JsonBackReference
-    @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinTable(
-            name = "users_pages_rated",
-            joinColumns = {@JoinColumn(name = "web_page_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}
 
-    )
-    private List<User> users;
-
-    @JsonBackReference
+    @JsonIgnoreProperties({"webpages"})
     @OneToMany(mappedBy = "webPage", fetch = FetchType.LAZY)
     private List<Vote> votes;
 
     @Column(name = "average_rating")
     private double averageRating;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"webpages"})
     @OneToMany(mappedBy = "webPage", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
@@ -49,7 +40,6 @@ public class WebPage {
 
     public WebPage(String url) {
         this.url = url;
-        this.users = new ArrayList<User>();
         this.votes = new ArrayList<Vote>();
         this.averageRating = 0.0;
         this.comments = new ArrayList<Comment>();
@@ -92,13 +82,6 @@ public class WebPage {
         this.url = url;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 
     public List<Vote> getVotes() {
         return votes;
@@ -124,9 +107,6 @@ public class WebPage {
         this.comments = comments;
     }
 
-    public int getNumberOfVotes() {
-        return this.getVotes().size();
-    }
 
     public void addVote(Vote vote) {
         this.votes.add(vote);
@@ -139,10 +119,6 @@ public class WebPage {
 
     }
 
-    public double calculateAverageRating() {
-        int totalVotes = this.getNumberOfVotes();
-        return this.upvotes / totalVotes;
-    }
 
     public int getNumberOfComments(Comment comment) {
         return this.getComments().size();
@@ -152,7 +128,4 @@ public class WebPage {
         this.comments.add(comment);
     }
 
-    public void addUser(User user) {
-        this.users.add(user);
-    }
 }

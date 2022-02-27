@@ -33,28 +33,18 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @JsonIgnoreProperties({"users"})
-    @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinTable(
-            name = "users_pages_rated",
-            joinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "web_page_id", nullable = false, updatable = false)}
-    )
-    private List<WebPage> pagesRated;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"users"})
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"users"})
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Vote> votes;
 
     public User(String name, String email) {
         this.name = name;
         this.email = email;
-        this.pagesRated = new ArrayList<WebPage>();
         this.comments = new ArrayList<Comment>();
         this.votes = new ArrayList<Vote>();
     }
@@ -86,17 +76,7 @@ public class User {
         this.email = email;
     }
 
-    public List<WebPage> getPagesRated() {
-        return pagesRated;
-    }
 
-    public void setPagesRated(List<WebPage> pagesRated) {
-        this.pagesRated = pagesRated;
-    }
-
-    public void addWebPage(WebPage webPage){
-        this.pagesRated.add(webPage);
-    }
 
     public List<Comment> getComments() {
         return comments;
