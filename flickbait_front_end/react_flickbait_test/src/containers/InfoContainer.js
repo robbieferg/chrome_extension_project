@@ -6,9 +6,9 @@ import Form from "../components/Form";
 
 const InfoContainer = () => {
 
-    const [webPages, setWebPages] = useState([]);
-    const [comments, setComments] = useState([]);
-    const [votes, setVotes] = useState([]);
+    // const [webPages, setWebPages] = useState([]);
+    // const [comments, setComments] = useState([]);
+    // const [votes, setVotes] = useState([]);
     const [selectedWebPage, setSelectedWebPage] = useState([]);
 
     let url = window.location.host;
@@ -19,7 +19,6 @@ const InfoContainer = () => {
       .then(res => res.json())
       .then(selectedWebPage => setSelectedWebPage(selectedWebPage[0]))
   }
-   
 
       const handleWebPagePost = function(webPage){
         const request = new Request();
@@ -39,16 +38,27 @@ const InfoContainer = () => {
         .then(() => window.location.reload())
       }
 
-    
+      const handleFullPost = (webpage, isUpVote, comment) => {
+        handleWebPagePost(webpage);
+        handleCommentPost(comment);
+        handleVotePost(isUpVote);
+      }
+
       useEffect(()=>{
         getUrl()
-      }, [selectedWebPage])
+      }, [selectedWebPage, getUrl, setSelectedWebPage])
 
     return (
         <>
         <div className="navbar-container">
           
-          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : <Form url={url} urlLink={urlLink} onWebPageCreate={handleWebPagePost} onVoteCreate={handleVotePost} onCommentCreate={handleCommentPost}/>}
+          {
+            selectedWebPage && false
+              ? <Rating selectedWebPage={selectedWebPage}/> 
+              : <Form url={url} urlLink={urlLink} handleFullPost={handleFullPost}/>
+          }
+
+          <button onClick={() => handleCommentPost("Hello, World")}>A</button>
           
         </div>
         </>

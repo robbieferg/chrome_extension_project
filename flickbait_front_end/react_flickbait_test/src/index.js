@@ -14,8 +14,8 @@ document.body.parentNode.insertBefore(insertionPoint, document.body);
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <FlickBait/> */}
     <InfoContainer/>
+    {/* <button>Hi.</button> */}
   </React.StrictMode>,
   insertionPoint
 );

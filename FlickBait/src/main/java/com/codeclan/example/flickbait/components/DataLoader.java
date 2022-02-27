@@ -50,7 +50,6 @@ public class DataLoader implements ApplicationRunner {
         WebPage messenger = new WebPage("messenger.com/");
         webPageRepository.save(messenger);
 
-
         Vote jackV1 = new Vote(true, soundCloud);
         voteRepository.save(jackV1);
         soundCloud.addVote(jackV1);
@@ -201,12 +200,12 @@ public class DataLoader implements ApplicationRunner {
         messenger.addVote(sarahV6);
         webPageRepository.save(messenger);
 
-        Comment jackComment1 = new Comment("Johnny", "Did you know that I make music?", soundCloud);
+        Comment jackComment1 = new Comment("Did you know that I make music?", soundCloud);
         commentRepository.save(jackComment1);
         soundCloud.addComment(jackComment1);
         webPageRepository.save(soundCloud);
 
-        Comment tamerComment1 = new Comment("tamer", "I am not a loser", guardian);
+        Comment tamerComment1 = new Comment("I am not a loser", guardian);
         commentRepository.save(tamerComment1);
         guardian.addComment(tamerComment1);
         webPageRepository.save(guardian);
