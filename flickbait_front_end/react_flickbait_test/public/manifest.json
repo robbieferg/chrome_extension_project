@@ -1,6 +1,6 @@
 {
-  "short_name": "Sticky Notes",
-  "name": "React Sticky Notes",
+  "short_name": "Flickbait",
+  "name": "React Flickbait App",
   "version": "1.0.0",
   "manifest_version": 2,
   "description": "Lets you annotate web pages and persists those annotaions across page visits",
@@ -15,6 +15,7 @@
     }
   ],
   "browser_action":{
+    "default_title": "Flickbait",
     "default_popup": "./popup.html"
   }
 }
