@@ -1,19 +1,16 @@
 
 import React from "react";
 
-const Rating = () => {
+const Rating = ({selectedWebPage}) => {
     
 
-    let url = "http://myanimelist.net";
-    
-    // chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-    // //     let url = tabs[0].url;
-    // //     return url;
-    // // });
+    const rating = selectedWebPage.upvotes / selectedWebPage.numberOfVotes;
 
     return (
         <>
-        <p>{url}</p>
+        <p>{selectedWebPage.url}</p>
+        <p>{selectedWebPage.upvotes}</p>
+        <p>{rating}</p>
         </>
     )
 }

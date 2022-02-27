@@ -18,17 +18,11 @@ public class Vote {
 
     @JsonIgnoreProperties({"votes"})
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @JsonIgnoreProperties({"votes"})
-    @ManyToOne
     @JoinColumn(name = "web_page_id", nullable = false)
     private WebPage webPage;
 
-    public Vote(boolean isUpVote, User user, WebPage webPage) {
+    public Vote(boolean isUpVote, WebPage webPage) {
         this.isUpVote = isUpVote;
-        this.user = user;
         this.webPage = webPage;
     }
 
@@ -51,13 +45,6 @@ public class Vote {
         isUpVote = upVote;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public WebPage getWebPage() {
         return webPage;

@@ -1,6 +1,7 @@
 package com.codeclan.example.flickbait.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -19,25 +20,15 @@ public class WebPage {
     @Column(name = "url")
     private String url;
 
-    @JsonBackReference
-    @ManyToMany
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinTable(
-            name = "users_pages_rated",
-            joinColumns = {@JoinColumn(name = "web_page_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", nullable = false, updatable = false)}
 
-    )
-    private List<User> users;
-
-    @JsonBackReference
+    @JsonIgnoreProperties({"webPage"})
     @OneToMany(mappedBy = "webPage", fetch = FetchType.LAZY)
     private List<Vote> votes;
 
     @Column(name = "average_rating")
     private double averageRating;
 
-    @JsonBackReference
+    @JsonIgnoreProperties({"webPage"})
     @OneToMany(mappedBy = "webPage", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
@@ -49,7 +40,6 @@ public class WebPage {
 
     public WebPage(String url) {
         this.url = url;
-        this.users = new ArrayList<User>();
         this.votes = new ArrayList<Vote>();
         this.averageRating = 0.0;
         this.comments = new ArrayList<Comment>();
@@ -58,6 +48,22 @@ public class WebPage {
     }
 
     public WebPage() {
+    }
+
+    public int getUpvotes() {
+        return upvotes;
+    }
+
+    public void setUpvotes(int upvotes) {
+        this.upvotes = upvotes;
+    }
+
+    public int getDownvotes() {
+        return downvotes;
+    }
+
+    public void setDownvotes(int downvotes) {
+        this.downvotes = downvotes;
     }
 
     public Long getId() {
@@ -76,13 +82,7 @@ public class WebPage {
         this.url = url;
     }
 
-    public List<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 
     public List<Vote> getVotes() {
         return votes;
@@ -108,22 +108,25 @@ public class WebPage {
         this.comments = comments;
     }
 
-    public int getNumberOfVotes() {
-        return this.getVotes().size();
-    }
+//    public int getNumberOfVotes() {
+//        return this.getVotes().size();
+//    }
 
     public void addVote(Vote vote) {
         this.votes.add(vote);
         if (vote.isUpVote() == true) {
             this.upvotes += 1;
         }
-        this.downvotes += 1;
+        else {
+            this.downvotes += 1;
+        }
+
     }
 
-    public double calculateAverageRating() {
-        int totalVotes = this.getNumberOfVotes();
-        return this.upvotes / totalVotes;
-    }
+//    public double calculateAverageRating() {
+//        int totalVotes = this.getNumberOfVotes();
+//        return this.upvotes / totalVotes;
+//    }
 
     public int getNumberOfComments(Comment comment) {
         return this.getComments().size();
@@ -133,7 +136,5 @@ public class WebPage {
         this.comments.add(comment);
     }
 
-    public void addUser(User user) {
-        this.users.add(user);
-    }
+
 }
