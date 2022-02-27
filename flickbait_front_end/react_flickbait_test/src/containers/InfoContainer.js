@@ -3,6 +3,8 @@ import Rating from "../components/Rating";
 import "./InfoContainer.css"
 import Request from "../helpers/request";
 import Form from "../components/Form";
+import $ from 'jquery';
+import HoverFunction from "../components/HoverFunction";
 
 const InfoContainer = () => {
 
@@ -64,8 +66,12 @@ const InfoContainer = () => {
         getUrl()
       }, [selectedWebPage, getUrl, setSelectedWebPage])
 
+      
+
     return (
         <>
+        <HoverFunction/>
+
         <div className="navbar-container">
           
           {
