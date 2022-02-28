@@ -3,6 +3,8 @@ import Rating from "../components/Rating";
 import "./InfoContainer.css"
 import Request from "../helpers/request";
 import Form from "../components/Form";
+import $ from 'jquery';
+import HoverFunction from "../components/HoverFunction";
 
 const InfoContainer = () => {
 
@@ -14,6 +16,8 @@ const InfoContainer = () => {
     let url = window.location.host;
     let urlLink = window.location.pathname;
 
+    const fullUrl = url + urlLink;
+
     const getUrl = function(){
       fetch(`http://localhost:8080/webpages?url=${url}${urlLink}`)
       .then(res => res.json())
@@ -23,6 +27,10 @@ const InfoContainer = () => {
       const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
+<<<<<<< HEAD
+        // .then(() => window.location.reload())
+=======
+>>>>>>> develop
       }
 
       const handleVotePost = function(vote){
@@ -33,6 +41,27 @@ const InfoContainer = () => {
 
       const handleCommentPost = function(props){
         const request = new Request();
+<<<<<<< HEAD
+        request.post("http://www.localhost:8080/comments", comment)
+        // .then(() => window.location.reload())
+      }
+
+      const handleFullPost = (webpage, isUpVote, comment) => {
+        handleWebPagePost(webpage)
+        .then(
+          handleCommentPost(
+            {
+              comment : comment,
+              webPage : {
+                url: fullUrl
+              }
+            }
+          )
+        )
+        .then(
+          handleVotePost(isUpVote)
+        )
+=======
         request.post("http://www.localhost:8080/comments", props)
         // .then(() => window.location.reload())
       }
@@ -56,14 +85,22 @@ const InfoContainer = () => {
             }
           )
           .then(() => window.location.reload())
+>>>>>>> develop
       }
+      // useEffect(() => {
+      //   handleWebPagePost(fullUrl)
+      // },[])
 
       useEffect(()=>{
         getUrl()
       }, [selectedWebPage, getUrl, setSelectedWebPage])
 
+      
+
     return (
         <>
+        <HoverFunction/>
+
         <div className="navbar-container">
           
           {
