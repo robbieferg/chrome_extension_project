@@ -31,6 +31,12 @@ public class WebPageController {
         return new ResponseEntity<>(webPage, HttpStatus.CREATED);
     }
 
+    @PatchMapping(value = "/webpages/{id}")
+    public ResponseEntity<WebPage> updateWebPage(@RequestBody WebPage webPage){
+        webPageRepository.save(webPage);
+        return new ResponseEntity<>(webPage, HttpStatus.OK);
+    }
+
 
 
 

@@ -12,6 +12,7 @@ const InfoContainer = () => {
     // const [comments, setComments] = useState([]);
     const [votes, setVotes] = useState([]);
     const [selectedWebPage, setSelectedWebPage] = useState([]);
+    const [latestVote, setLatestVote] = useState([]);
 
     let url = window.location.host;
     let urlLink = window.location.pathname;
@@ -36,13 +37,15 @@ const InfoContainer = () => {
         .then(() => window.location.reload())
       }
 
-      // const handleWebPagePut = function(props) {
-      //   request.put("http://www.localhost:8080/webpages", props)
-      // }
+      const handleWebPagePatch = function(webpage) {
+        const request = new Request();
+        request.patch(`http://www.localhost:8080/webpages/${selectedWebPage.id}`, webpage)
+      }
 
       const handleVotePost = function(vote){
         const request = new Request();
         request.post("http://www.localhost:8080/votes", vote)
+        .then(vote => setLatestVote(vote))
         // .then(() => window.location.reload())
       }
 
@@ -87,11 +90,20 @@ const InfoContainer = () => {
           handleWebPagePost(fullUrl)
         }
         getVotes()
-      },[selectedWebPage, votes])
+      },[selectedWebPage])
 
-  
-
+      useEffect(() => {
+        handleWebPagePatch(addVote(latestVote))
+      },[handleFullPost])
       
+      const addVote= (vote) => {
+        if (vote.isUpVote == true) {
+            selectedWebPage.upvotes += 1;
+        }
+        else {
+            selectedWebPage.downvotes += 1;
+        }
+    }
 
     return (
         <>
@@ -102,7 +114,7 @@ const InfoContainer = () => {
             votes={votes} url={fullUrl}/>}
               <div className="form-container">
                 <Form url={url} urlLink={urlLink} handleFullPost={handleFullPost}
-                handleComment={handleCommentPost}/>
+                handleComment={handleCommentPost} selectedWebPage={selectedWebPage}/>
               </div>
           </div>
         </>

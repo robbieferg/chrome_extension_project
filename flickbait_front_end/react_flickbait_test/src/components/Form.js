@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Form = ({ url, urlLink, handleFullPost }) => {
+const Form = ({ url, urlLink, handleFullPost, selectedWebPage }) => {
 
   const [fullUrl, _] = useState(url + urlLink)
 
