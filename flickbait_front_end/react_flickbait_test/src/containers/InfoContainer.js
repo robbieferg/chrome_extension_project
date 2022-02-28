@@ -30,6 +30,10 @@ const InfoContainer = () => {
         // .then(() => window.location.reload())
       }
 
+      // const handleWebPagePut = function(props) {
+      //   request.put("http://www.localhost:8080/webpages", props)
+      // }
+
       const handleVotePost = function(vote){
         const request = new Request();
         request.post("http://www.localhost:8080/votes", vote)
@@ -43,21 +47,17 @@ const InfoContainer = () => {
       }
 
       const handleFullPost = (webpage, vote, comment) => {
-        handleWebPagePost(webpage)
+       
           handleCommentPost(
             {
               "text": comment,
-              "webPage": {
-                "id": 1
-              }
+              "webPage": selectedWebPage
             }
           )
           handleVotePost(
             {
               "isUpVote": vote,
-              "webPage": {
-                "id": 1
-              }
+              "webPage": selectedWebPage
             }
           )
           .then(() => window.location.reload())
@@ -68,7 +68,13 @@ const InfoContainer = () => {
 
       useEffect(()=>{
         getUrl()
+        if (!selectedWebPage) {
+          handleWebPagePost(selectedWebPage);
+        }
+        
       }, [selectedWebPage, getUrl, setSelectedWebPage])
+
+      
 
       
 
