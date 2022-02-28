@@ -1,10 +1,19 @@
 {
-  "short_name": "Sticky Notes",
-  "name": "React Sticky Notes",
+  "short_name": "Flickbait",
+  "name": "Flickbait",
   "version": "1.0.0",
   "manifest_version": 2,
   "description": "Lets you annotate web pages and persists those annotaions across page visits",
+<<<<<<< HEAD
   "permissions": ["storage", "tabs", "activeTab"],
+=======
+  "permissions": ["storage", "tabs"],
+  "icons": {
+    "16": "FlickBait-16.png",
+    "48": "FlickBait-48.png",
+    "128": "FlickBait-128.png"
+  },
+>>>>>>> develop
   "content_security_policy": "connect-src ws://localhost:8097",
   "content_scripts": [
     {
@@ -15,6 +24,8 @@
     }
   ],
   "browser_action":{
+    "default_title": "Webpage Comments",
     "default_popup": "./popup.html"
   }
+  
 }
