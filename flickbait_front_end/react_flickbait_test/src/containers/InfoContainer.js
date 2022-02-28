@@ -22,6 +22,7 @@ const InfoContainer = () => {
       fetch(`http://localhost:8080/webpages?url=${fullUrl}`)
       .then(res => res.json())
       .then(selectedWebPage => setSelectedWebPage(selectedWebPage[0]))
+      
   }
 
       const handleWebPagePost = function(webPage){
@@ -46,7 +47,7 @@ const InfoContainer = () => {
         // .then(() => window.location.reload())
       }
 
-      const handleFullPost = (webpage, vote, comment) => {
+      const handleFullPost = (website, vote, comment) => {
        
           handleCommentPost(
             {
@@ -68,13 +69,18 @@ const InfoContainer = () => {
 
       useEffect(()=>{
         getUrl()
-        if (!selectedWebPage) {
-          handleWebPagePost(selectedWebPage);
-        }
-        
-      }, [selectedWebPage, getUrl, setSelectedWebPage])
+        console.log("first use effect triggered")
+        // if (!selectedWebPage) {
+        //   handleWebPagePost(selectedWebPage);
+        // }
+      }, [])
 
-      
+      useEffect(() => {
+        if(!selectedWebPage) {
+          console.log("second use effect triggered")
+          handleWebPagePost(fullUrl)
+        }
+      },[selectedWebPage])
 
       
 
