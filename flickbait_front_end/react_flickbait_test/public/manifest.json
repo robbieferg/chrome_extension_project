@@ -1,10 +1,15 @@
 {
   "short_name": "Flickbait",
-  "name": "React Flickbait App",
+  "name": "Flickbait",
   "version": "1.0.0",
   "manifest_version": 2,
   "description": "Lets you annotate web pages and persists those annotaions across page visits",
   "permissions": ["storage", "tabs"],
+  "icons": {
+    "16": "FlickBait-16.png",
+    "48": "FlickBait-48.png",
+    "128": "FlickBait-128.png"
+  },
   "content_security_policy": "connect-src ws://localhost:8097",
   "content_scripts": [
     {
@@ -15,7 +20,8 @@
     }
   ],
   "browser_action":{
-    "default_title": "Flickbait",
+    "default_title": "Webpage Comments",
     "default_popup": "./popup.html"
   }
+  
 }
