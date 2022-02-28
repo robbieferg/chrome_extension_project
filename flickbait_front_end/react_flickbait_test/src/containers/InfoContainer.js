@@ -37,9 +37,9 @@ const InfoContainer = () => {
         .then(() => window.location.reload())
       }
 
-      const handleWebPagePatch = function(webpage) {
+      const handleWebPagePut = function(webpage) {
         const request = new Request();
-        request.patch(`http://www.localhost:8080/webpages/${selectedWebPage.id}`, webpage)
+        request.put(`http://www.localhost:8080/webpages/${selectedWebPage.id}`, webpage)
       }
 
       const handleVotePost = function(vote){
@@ -93,7 +93,7 @@ const InfoContainer = () => {
       },[selectedWebPage])
 
       useEffect(() => {
-        handleWebPagePatch(addVote(latestVote))
+        handleWebPagePut(addVote(latestVote))
       },[handleFullPost])
       
       const addVote= (vote) => {

@@ -31,6 +31,18 @@ public class WebPageController {
         return new ResponseEntity<>(webPage, HttpStatus.CREATED);
     }
 
+    @PutMapping(value = "/webpages/{id}")
+    public ResponseEntity updateWebPageById(@PathVariable Long id, @RequestBody WebPage updatedWebPage){
+        WebPage webPageToUpdate = webPageRepository.findById(id).get();
+        webPageToUpdate.setVotes(updatedWebPage.getVotes());
+        webPageToUpdate.setComments(updatedWebPage.getComments());
+        webPageToUpdate.setUpvotes(updatedWebPage.getUpvotes());
+        webPageToUpdate.setDownvotes(updatedWebPage.getDownvotes());
+        webPageToUpdate.setAverageRating(updatedWebPage.getAverageRating());
+        webPageRepository.save(webPageToUpdate);
+        return new ResponseEntity<>(webPageToUpdate, HttpStatus.OK);
+    }
+
     @PatchMapping(value = "/webpages/{id}")
     public ResponseEntity<WebPage> updateWebPage(@RequestBody WebPage webPage){
         webPageRepository.save(webPage);
