@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./HoverFunction.css"
-import Request from "../helpers/request";
+// import Request from "../helpers/request";
 import $ from 'jquery';
 
 const HoverFunction = () => {

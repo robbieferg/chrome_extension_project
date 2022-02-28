@@ -3,8 +3,8 @@ import Rating from "../components/Rating";
 import "./InfoContainer.css"
 import Request from "../helpers/request";
 import Form from "../components/Form";
-import $ from 'jquery';
 import HoverFunction from "../components/HoverFunction";
+import $ from 'jquery';
 
 const InfoContainer = () => {
 
@@ -19,7 +19,7 @@ const InfoContainer = () => {
     const fullUrl = url + urlLink;
 
     const getUrl = function(){
-      fetch(`http://localhost:8080/webpages?url=${url}${urlLink}`)
+      fetch(`http://localhost:8080/webpages?url=${fullUrl}`)
       .then(res => res.json())
       .then(selectedWebPage => setSelectedWebPage(selectedWebPage[0]))
   }
@@ -27,10 +27,7 @@ const InfoContainer = () => {
       const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
-<<<<<<< HEAD
         // .then(() => window.location.reload())
-=======
->>>>>>> develop
       }
 
       const handleVotePost = function(vote){
@@ -41,27 +38,6 @@ const InfoContainer = () => {
 
       const handleCommentPost = function(props){
         const request = new Request();
-<<<<<<< HEAD
-        request.post("http://www.localhost:8080/comments", comment)
-        // .then(() => window.location.reload())
-      }
-
-      const handleFullPost = (webpage, isUpVote, comment) => {
-        handleWebPagePost(webpage)
-        .then(
-          handleCommentPost(
-            {
-              comment : comment,
-              webPage : {
-                url: fullUrl
-              }
-            }
-          )
-        )
-        .then(
-          handleVotePost(isUpVote)
-        )
-=======
         request.post("http://www.localhost:8080/comments", props)
         // .then(() => window.location.reload())
       }
@@ -85,7 +61,6 @@ const InfoContainer = () => {
             }
           )
           .then(() => window.location.reload())
->>>>>>> develop
       }
       // useEffect(() => {
       //   handleWebPagePost(fullUrl)
@@ -110,7 +85,7 @@ const InfoContainer = () => {
               handleComment={handleCommentPost}/>
           }
 
-          <button onClick={() => handleCommentPost("Hello, World")}>A</button>
+          {/* <button onClick={() => handleCommentPost("Hello, World")}>A</button> */}
           
         </div>
         </>
