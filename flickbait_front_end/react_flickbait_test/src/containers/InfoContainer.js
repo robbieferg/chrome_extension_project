@@ -21,14 +21,14 @@ const InfoContainer = () => {
     const getUrl = function(){
       fetch(`http://localhost:8080/webpages?url=${fullUrl}`)
       .then(res => res.json())
-      .then(selectedWebPage => setSelectedWebPage(selectedWebPage[0]))
+      .then(selectedWebPage123 => setSelectedWebPage(selectedWebPage123[0]))
       
   }
 
       const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
-        // .then(() => window.location.reload())
+        .then(() => window.location.reload())
       }
 
       // const handleWebPagePut = function(props) {
@@ -52,13 +52,17 @@ const InfoContainer = () => {
           handleCommentPost(
             {
               "text": comment,
-              "webPage": selectedWebPage
+              "webPage": {
+              "id": selectedWebPage.id
+              }
             }
           )
           handleVotePost(
             {
               "isUpVote": vote,
-              "webPage": selectedWebPage
+              "webPage": {
+                "id": selectedWebPage.id
+              }
             }
           )
           .then(() => window.location.reload())
