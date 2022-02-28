@@ -1,14 +1,12 @@
 package com.codeclan.example.flickbait.controllers;
 
+import com.codeclan.example.flickbait.models.Comment;
 import com.codeclan.example.flickbait.models.Vote;
 import com.codeclan.example.flickbait.repositories.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,9 +21,17 @@ public class VoteController {
         return new ResponseEntity<>(voteRepository.findAll(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/votes/webpages")
+    public ResponseEntity<List<Vote>> getAllVotesFromWebpage(
+            @RequestParam(name = "url") String url
+    ) {
+        return new ResponseEntity<>(voteRepository.findByWebPageUrl(url), HttpStatus.OK);
+    }
+
     @PostMapping(value = "/votes")
     public ResponseEntity<Vote> createVote(@RequestBody Vote vote) {
         voteRepository.save(vote);
+
         return new ResponseEntity<>(vote, HttpStatus.CREATED);
     }
 }

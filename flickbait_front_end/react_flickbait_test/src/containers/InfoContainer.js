@@ -10,7 +10,7 @@ const InfoContainer = () => {
 
     // const [webPages, setWebPages] = useState([]);
     // const [comments, setComments] = useState([]);
-    // const [votes, setVotes] = useState([]);
+    const [votes, setVotes] = useState([]);
     const [selectedWebPage, setSelectedWebPage] = useState([]);
 
     let url = window.location.host;
@@ -22,8 +22,13 @@ const InfoContainer = () => {
       fetch(`http://localhost:8080/webpages?url=${fullUrl}`)
       .then(res => res.json())
       .then(selectedWebPage123 => setSelectedWebPage(selectedWebPage123[0]))
-      
-  }
+    }
+
+    const getVotes = function(){
+      fetch(`http://localhost:8080/votes/webpages?url=${fullUrl}`)
+      .then(res => res.json())
+      .then(voteList => setVotes(voteList))
+    }
 
       const handleWebPagePost = function(webPage){
         const request = new Request();
@@ -48,7 +53,7 @@ const InfoContainer = () => {
       }
 
       const handleFullPost = (website, vote, comment) => {
-       
+          console.log(vote);
           handleCommentPost(
             {
               "text": comment,
@@ -74,9 +79,6 @@ const InfoContainer = () => {
       useEffect(()=>{
         getUrl()
         console.log("first use effect triggered")
-        // if (!selectedWebPage) {
-        //   handleWebPagePost(selectedWebPage);
-        // }
       }, [])
 
       useEffect(() => {
@@ -84,7 +86,10 @@ const InfoContainer = () => {
           console.log("second use effect triggered")
           handleWebPagePost(fullUrl)
         }
-      },[selectedWebPage])
+        getVotes()
+      },[selectedWebPage, votes])
+
+  
 
       
 
@@ -92,18 +97,14 @@ const InfoContainer = () => {
         <>
         <HoverFunction/>
 
-        <div className="navbar-container">
-          
-          {
-            selectedWebPage && false
-              ? <Rating selectedWebPage={selectedWebPage}/> 
-              : <Form url={url} urlLink={urlLink} handleFullPost={handleFullPost}
-              handleComment={handleCommentPost}/>
-          }
-
-          {/* <button onClick={() => handleCommentPost("Hello, World")}>A</button> */}
-          
-        </div>
+          <div className="navbar-container"> 
+            {selectedWebPage && <Rating selectedWebPage={selectedWebPage}
+            votes={votes} url={fullUrl}/>}
+              <div className="form-container">
+                <Form url={url} urlLink={urlLink} handleFullPost={handleFullPost}
+                handleComment={handleCommentPost}/>
+              </div>
+          </div>
         </>
     )
 }
