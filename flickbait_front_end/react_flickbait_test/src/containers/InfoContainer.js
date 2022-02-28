@@ -14,6 +14,15 @@ const InfoContainer = () => {
     const [selectedWebPage, setSelectedWebPage] = useState([]);
     const [latestVote, setLatestVote] = useState([]);
 
+    const addVote= (vote) => {
+      if (vote.isUpVote == true) {
+          selectedWebPage.upvotes += 1;
+      }
+      else {
+          selectedWebPage.downvotes += 1;
+      }
+    }
+
     let url = window.location.host;
     let urlLink = window.location.pathname;
 
@@ -45,7 +54,7 @@ const InfoContainer = () => {
       const handleVotePost = function(vote){
         const request = new Request();
         request.post("http://www.localhost:8080/votes", vote)
-        .then(vote => setLatestVote(vote))
+        .then(setLatestVote(vote))
         // .then(() => window.location.reload())
       }
 
@@ -93,17 +102,14 @@ const InfoContainer = () => {
       },[selectedWebPage])
 
       useEffect(() => {
-        handleWebPagePut(addVote(latestVote))
+        handleWebPagePut(selectedWebPage)
+      },[addVote])
+
+      useEffect(() => {
+        addVote(latestVote) 
       },[handleFullPost])
       
-      const addVote= (vote) => {
-        if (vote.isUpVote == true) {
-            selectedWebPage.upvotes += 1;
-        }
-        else {
-            selectedWebPage.downvotes += 1;
-        }
-    }
+      
 
     return (
         <>

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import "./HoverFunction.css"
+import React from 'react';
+import "./HoverFunction.css";
 // import Request from "../helpers/request";
 import $ from 'jquery';
 
@@ -35,14 +35,14 @@ const HoverFunction = () => {
         <>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 
-        <body>
+       
             <div id="pop-up">
                 <p>
                 This div only appears when a link is hovered over. Otherwise it is hidden from view.
                 </p>
                 
             </div>
-        </body> 
+        
       </>
     )
 }
