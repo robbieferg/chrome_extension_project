@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, isValidElement } from "react";
 import Rating from "../components/Rating";
 import "./InfoContainer.css"
 import Request from "../helpers/request";
@@ -6,9 +6,9 @@ import Form from "../components/Form";
 
 const InfoContainer = () => {
 
-    const [webPages, setWebPages] = useState([]);
-    const [comments, setComments] = useState([]);
-    const [votes, setVotes] = useState([]);
+    // const [webPages, setWebPages] = useState([]);
+    // const [comments, setComments] = useState([]);
+    // const [votes, setVotes] = useState([]);
     const [selectedWebPage, setSelectedWebPage] = useState([]);
 
     let url = window.location.host;
@@ -19,36 +19,61 @@ const InfoContainer = () => {
       .then(res => res.json())
       .then(selectedWebPage => setSelectedWebPage(selectedWebPage[0]))
   }
-   
 
       const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
-        // .then(() => window.location = 'http://www.localhost:8080/webpages')
       }
 
       const handleVotePost = function(vote){
         const request = new Request();
         request.post("http://www.localhost:8080/votes", vote)
-        // .then(() => window.location = 'http://www.localhost:8080/votes')
+        // .then(() => window.location.reload())
       }
 
-      const handleCommentPost = function(comment){
+      const handleCommentPost = function(props){
         const request = new Request();
-        request.post("http://www.localhost:8080/comments", comment)
-        // .then(() => window.location = 'http://www.localhost:8080/comments')
+        request.post("http://www.localhost:8080/comments", props)
+        // .then(() => window.location.reload())
       }
 
-    
+      const handleFullPost = (webpage, vote, comment) => {
+        handleWebPagePost(webpage)
+          handleCommentPost(
+            {
+              "text": comment,
+              "webPage": {
+                "id": 1
+              }
+            }
+          )
+          handleVotePost(
+            {
+              "isUpVote": vote,
+              "webPage": {
+                "id": 1
+              }
+            }
+          )
+          .then(() => window.location.reload())
+      }
+
       useEffect(()=>{
         getUrl()
-      }, [selectedWebPage])
+      }, [selectedWebPage, getUrl, setSelectedWebPage])
 
     return (
         <>
         <div className="navbar-container">
           
-          {selectedWebPage ? <Rating selectedWebPage={selectedWebPage}/> : <Form url={url} urlLink={urlLink} onWebPageCreate={handleWebPagePost} onVoteCreate={handleVotePost} onCommentCreate={handleCommentPost}/>}
+          {
+            selectedWebPage && false
+              ? <Rating selectedWebPage={selectedWebPage}/> 
+              : <Form url={url} urlLink={urlLink} handleFullPost={handleFullPost}
+              handleComment={handleCommentPost}/>
+          }
+
+          <button onClick={() => handleCommentPost("Hello, World")}>A</button>
           
         </div>
         </>

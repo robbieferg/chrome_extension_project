@@ -1,71 +1,25 @@
 import { useState } from "react";
 
-const Form = ({ url, urlLink, onWebPageCreate, onVoteCreate, onCommentCreate }) => {
+const Form = ({ url, urlLink, handleFullPost }) => {
 
-  const fullUrl = url + urlLink
+  const [fullUrl, _] = useState(url + urlLink)
 
-  const [stateWebPage, setStateWebPage] = useState(
-    {
-      url: fullUrl
-    }
-  )
+  const [comment, updateComment] = useState("")
 
-
-  const [stateVote, setStateVote] = useState(
-    {
-      isUpVote: false,
-      webPage: stateWebPage
-    }
-  )
-
-  const [stateComment, setStateComment] = useState(
-    {
-      author: "",
-      text: "",
-      webPage: stateWebPage
-    }
-  )
-
- 
-
-  const handleVoteChange = function(event) {
-      const vote = event.target.value;
-      let copiedVote = { ...stateVote }
-      let isUpVote = true;
-      
-      if(vote == "upvote") {
-          copiedVote[isUpVote] = true;
-      }
-      else {
-          copiedVote[isUpVote] = false;
-      }
-      setStateVote(copiedVote);
-  }
-
-  const handleCommentChange = function(event) {
-      const text = event.target.value;
-      let copiedComment = { ...stateComment }
-      copiedComment[text] = text;
-  }
-
-  const handleSubmit = function (event) {
-    event.preventDefault();
-    onWebPageCreate(stateWebPage);
-    // onUserCreate(stateUser);
-    // onCommentCreate(stateComment);
-    // onVoteCreate(stateVote);
+  const onVote = (isUpVote) => {
+    handleFullPost(fullUrl, isUpVote, comment)
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <select onChange={handleVoteChange}>
-        <option value="upvote" key="up">⬆</option>
-        <option value="downvote" key="down">⬇</option>
-      </select>
-      <input type="text" name="name" placeholder="type name"/>
-      <input type="text" value={fullUrl} />
-      <button type="submit">Save</button>
-    </form>
+
+    <div>
+      <button onClick={() => onVote(true)} value="upvote" key="up">⬆</button>
+      <button onClick={() => onVote(false)} value="downvote" key="down">⬇</button>
+      <input type="text" name="comment" placeholder="Your comment" 
+      value={comment} onChange={(e) => updateComment(e.target.value)} />
+      <input type="text" placeholder={fullUrl} readOnly />
+    </div>
+    
   );
 }
 

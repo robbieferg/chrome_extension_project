@@ -18,6 +18,7 @@
     "build": "react-scripts build",
     "build:extension": "node ./scripts/build-non-split.js && npm run build:clean",
     "build:clean": "cd build && mv static/js/*.js main.js && mv static/css/*.css main.css && rm -r static",
+    "react-devtools": "react-devtools",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -38,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-devtools": "^4.23.0"
   }
 }
