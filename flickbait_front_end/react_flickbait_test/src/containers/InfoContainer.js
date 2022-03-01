@@ -14,33 +14,25 @@ const InfoContainer = () => {
     const [selectedWebPage, setSelectedWebPage] = useState([]);
     const [latestVote, setLatestVote] = useState([]);
 
-    const addVote= (vote) => {
-      if (vote.isUpVote == true) {
-          selectedWebPage.upvotes += 1;
-      }
-      else {
-          selectedWebPage.downvotes += 1;
-      }
-    }
-
+    
     let url = window.location.host;
     let urlLink = window.location.pathname;
-
+    
     const fullUrl = url + urlLink;
-
+    
     const getUrl = function(){
       fetch(`http://localhost:8080/webpages?url=${fullUrl}`)
       .then(res => res.json())
       .then(selectedWebPage123 => setSelectedWebPage(selectedWebPage123[0]))
     }
-
+    
     const getVotes = function(){
       fetch(`http://localhost:8080/votes/webpages?url=${fullUrl}`)
       .then(res => res.json())
       .then(voteList => setVotes(voteList))
     }
-
-      const handleWebPagePost = function(webPage){
+    
+    const handleWebPagePost = function(webPage){
         const request = new Request();
         request.post("http://www.localhost:8080/webpages", webPage)
         .then(() => window.location.reload())
@@ -50,33 +42,42 @@ const InfoContainer = () => {
         const request = new Request();
         request.put(`http://www.localhost:8080/webpages/${selectedWebPage.id}`, webpage)
       }
-
+      
       const handleVotePost = function(vote){
         const request = new Request();
         request.post("http://www.localhost:8080/votes", vote)
         .then(setLatestVote(vote))
         // .then(() => window.location.reload())
       }
-
+      
       const handleCommentPost = function(props){
         const request = new Request();
         request.post("http://www.localhost:8080/comments", props)
         // .then(() => window.location.reload())
       }
+      
+      const addVote= (vote) => {
+        if (vote.upVote == true) {
+            selectedWebPage.upvotes += 1;
+        }
+        else {
+            selectedWebPage.downvotes += 1;
+        }
+      }
 
       const handleFullPost = (website, vote, comment) => {
-          console.log(vote);
-          handleCommentPost(
-            {
-              "text": comment,
-              "webPage": {
+        console.log(vote);
+        handleCommentPost(
+          {
+            "text": comment,
+            "webPage": {
               "id": selectedWebPage.id
-              }
             }
+          }
           )
           handleVotePost(
             {
-              "isUpVote": vote,
+              "upVote": vote,
               "webPage": {
                 "id": selectedWebPage.id
               }

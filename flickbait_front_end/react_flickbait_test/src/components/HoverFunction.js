@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./HoverFunction.css";
 // import Request from "../helpers/request";
 import $ from 'jquery';
 
 const HoverFunction = () => {
+
+    const [hoverHref,setHoverHref]= useState("")
 
     $(document).ready(function(){
         // $("a").hover(function(){
@@ -14,15 +16,16 @@ const HoverFunction = () => {
             var moveDown = 10;
          
             $('a').hover(function(e) {
-                $("div#pop-up").append("<span id='txt_name'><br>" + $(this).attr("href") + "</span>")
-              $('div#pop-up').show();
+                // $("div#pop-up").append("<span id='txt_name'><br>" + $(this).attr("href") + "</span>")
+                $('div#pop-up').show();
+                setHoverHref($(this).attr("href"))
             
               //.css('top', e.pageY + moveDown)
               //.css('left', e.pageX + moveLeft)
               //.appendTo('body');
             }, function() {
-                $("#txt_name").remove()
-              $('div#pop-up').hide();
+                // $("#txt_name").remove()
+                $('div#pop-up').hide();
                 // $('#txt_name').prepend()
             });
             $('a').mousemove(function(e) {
@@ -39,8 +42,10 @@ const HoverFunction = () => {
             <div id="pop-up">
                 <p>
                 This div only appears when a link is hovered over. Otherwise it is hidden from view.
+                <br/>
+                Current Href:{hoverHref}
+            
                 </p>
-                
             </div>
         
       </>
