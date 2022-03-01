@@ -102,13 +102,14 @@ const InfoContainer = () => {
         getVotes()
       },[selectedWebPage])
 
-      useEffect(() => {
-        handleWebPagePut(selectedWebPage)
-      },[addVote])
+      // useEffect(() => {
+      //   handleWebPagePut(selectedWebPage)
+      // },[votes])
 
       useEffect(() => {
         addVote(latestVote) 
-      },[handleFullPost])
+        handleWebPagePut(selectedWebPage)
+      },[latestVote])
       
       
 
