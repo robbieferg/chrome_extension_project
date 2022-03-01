@@ -10,19 +10,15 @@ const Rating = ({selectedWebPage, votes, url}) => {
 
     const votesLength = votes.length;
 
-    const siteRating = function(){  
-        if (votesLength === 0){
-            return "No votes"
-        } else {
-            return (selectedWebPage.upvotes / votesLength) * 100;
-        }
-    }
+    let ratingString = selectedWebPage.averageRating.toString();
+
+    const stringLength = 5;
 
     return (
         <>
         <p className="block">Web URL: {selectedWebPage.url}</p>
         <p className="block"> No. of Votes: {votesLength}</p>
-        {/* <p className="block">{siteRating}% of Users like this page</p> */}
+        <p className="block">{ratingString.substring(0, stringLength)}% of Users like this page</p>
         </>
     )
 }
