@@ -4,8 +4,7 @@ import {Link} from 'react-router-dom';
 const Comment = ({comment}) => {
     return (
         <>
-        <p>{comment.text}</p>
-        <p>{comment.dateAndTime}</p>
+        <p>Comment: {comment.text}</p>
         </>
     )
 }
