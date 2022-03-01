@@ -11,10 +11,9 @@ const HoverFunction = () => {
     const trimHref = hoverHref.replace(/^https?\:\/\//i, "");
 
     const getUrl = () => {
-      console.log(`http://localhost:8080/webpages?url=${trimHref}`)
-      fetch(`http://localhost:8080/webpages?url=${trimHref}`)
+      fetch(`http://localhost:8080/webpages?url=${hoverHref}`)
       .then(res => res.json())
-      .then(link => console.log(link[0]))
+      .then(link123 => setHoverLink(link123[0]))
     }
 
     useEffect(() => {
@@ -33,7 +32,6 @@ const HoverFunction = () => {
                 // $("div#pop-up").append("<span id='txt_name'><br>" + $(this).attr("href") + "</span>")
                 $('div#pop-up').show();
                 setHoverHref($(this).attr("href"))
-                console.log($(this).attr("href"))
 
             
               //.css('top', e.pageY + moveDown)
@@ -49,20 +47,28 @@ const HoverFunction = () => {
             });
           });
     })
+
+    let ratingString = hoverLink.averageRating + ""
+    console.log(ratingString)
+    const stringLength = 5;
+
+    const percentageRating = ratingString.substring(0, stringLength);
+    const numberOfVotes = hoverLink.upvotes + hoverLink.downvotes;
     
     return(
         <>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
 
        
-            <div id="pop-up">
-                <p>
-                This div only appears when a link is hovered over. Otherwise it is hidden from view.
-                <br/>
+            {/* <div id="pop-up">
+              <img source="react_flickbait_test/public/FlickBait-16.png" alt="FlickBait"/>
+              <p>Total votes: {numberOfVotes}</p>
+              <br/>
+              <p>Average Rating: {percentageRating}</p>
+              <p>
                 Current Href:{hoverHref}
-            
-                </p>
-            </div>
+              </p>
+            </div> */}
         
       </>
     )
