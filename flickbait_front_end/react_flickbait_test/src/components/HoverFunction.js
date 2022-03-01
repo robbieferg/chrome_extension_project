@@ -6,20 +6,29 @@ import $ from 'jquery';
 const HoverFunction = () => {
 
     const [hoverHref, setHoverHref] = useState("");
-    const [hoverLink, setHoverLink] = useState([]);
+    const [link, setLink] = useState([]);
 
     const trimHref = hoverHref.replace(/^https?\:\/\//i, "");
+
+    // let ratingString = hoverLink.averageRating + ""
+    // // console.log(ratingString)
+    // const stringLength = 5;
+
+    // const percentageRating = ratingString.substring(0, stringLength);
+    // const numberOfVotes = hoverLink.upvotes + hoverLink.downvotes;
 
     const getUrl = () => {
       console.log(`http://localhost:8080/webpages?url=${trimHref}`)
       fetch(`http://localhost:8080/webpages?url=${trimHref}`)
       .then(res => res.json())
-      .then(link => console.log(link[0]))
+      .then(link => setLink(link));
     }
 
     useEffect(() => {
       getUrl()
     }, [hoverHref])
+
+
 
     $(document).ready(function(){
         // $("a").hover(function(){
@@ -33,7 +42,7 @@ const HoverFunction = () => {
                 // $("div#pop-up").append("<span id='txt_name'><br>" + $(this).attr("href") + "</span>")
                 $('div#pop-up').show();
                 setHoverHref($(this).attr("href"))
-                console.log($(this).attr("href"))
+                // console.log($(this).attr("href"))
 
             
               //.css('top', e.pageY + moveDown)
@@ -56,12 +65,10 @@ const HoverFunction = () => {
 
        
             <div id="pop-up">
-                <p>
-                This div only appears when a link is hovered over. Otherwise it is hidden from view.
-                <br/>
-                Current Href:{hoverHref}
-            
-                </p>
+              {/* <p>Total votes: {numberOfVotes}</p>
+              <p>Avg. Rating: {percentageRating}</p> */}
+              {/* <p>{hoverLink}</p> */}
+              <p>Current Href:{hoverHref}</p>
             </div>
         
       </>
