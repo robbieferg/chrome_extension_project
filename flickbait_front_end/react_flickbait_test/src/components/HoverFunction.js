@@ -6,19 +6,18 @@ import $ from 'jquery';
 const HoverFunction = () => {
 
     const [hoverHref, setHoverHref] = useState("");
-    const [link, setLink] = useState([]);
+    const [link, setLink] = useState([{}]);
 
-    const trimHref = hoverHref.replace(/^https?\:\/\//i, "");
+    const trimHref = hoverHref.replace(/^https?\:\/\//i, "") ?? "";
 
-    // let ratingString = hoverLink.averageRating + ""
-    // // console.log(ratingString)
-    // const stringLength = 5;
+    const ratingString = link?.[0]?.averageRating?.toString() ?? "" + "";
+    const stringLength = 5;
 
-    // const percentageRating = ratingString.substring(0, stringLength);
-    // const numberOfVotes = hoverLink.upvotes + hoverLink.downvotes;
+    const percentageRating = ratingString?.substring(0, stringLength) ?? "No Data";
+    const numberOfVotes = (link?.[0]?.upvotes ?? 0) + (link?.[0]?.downvotes ?? 0);
 
     const getUrl = () => {
-      console.log(`http://localhost:8080/webpages?url=${trimHref}`)
+      // console.log(`http://localhost:8080/webpages?url=${trimHref}`)
       fetch(`http://localhost:8080/webpages?url=${trimHref}`)
       .then(res => res.json())
       .then(link => setLink(link));
@@ -31,27 +30,21 @@ const HoverFunction = () => {
 
 
     $(document).ready(function(){
-        // $("a").hover(function(){
-          // $(this).css("color","pink");
-          // $(this).append($(this).attr("href"))
+
           $(function() {
             var moveLeft = 20;
             var moveDown = 10;
          
             $('a').hover(function(e) {
-                // $("div#pop-up").append("<span id='txt_name'><br>" + $(this).attr("href") + "</span>")
+
                 $('div#pop-up').show();
                 setHoverHref($(this).attr("href"))
-                // console.log($(this).attr("href"))
+                // console.log(JSON.stringify($(this).attr("href")))
 
-            
-              //.css('top', e.pageY + moveDown)
-              //.css('left', e.pageX + moveLeft)
-              //.appendTo('body');
             }, function() {
-                // $("#txt_name").remove()
+
                 $('div#pop-up').hide();
-                // $('#txt_name').prepend()
+
             });
             $('a').mousemove(function(e) {
               $("div#pop-up").css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
@@ -65,9 +58,8 @@ const HoverFunction = () => {
 
        
             <div id="pop-up">
-              {/* <p>Total votes: {numberOfVotes}</p>
-              <p>Avg. Rating: {percentageRating}</p> */}
-              {/* <p>{hoverLink}</p> */}
+              <p>Total votes: {numberOfVotes}</p>
+              <p>Avg. Rating: {percentageRating}%</p>
               <p>Current Href:{hoverHref}</p>
             </div>
         
