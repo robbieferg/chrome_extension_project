@@ -1,11 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./HoverFunction.css";
 // import Request from "../helpers/request";
 import $ from 'jquery';
 
 const HoverFunction = () => {
 
-    const [hoverHref,setHoverHref]= useState("")
+    const [hoverHref, setHoverHref] = useState("");
+    const [hoverLink, setHoverLink] = useState([]);
+
+    const trimHref = hoverHref.replace(/^https?\:\/\//i, "");
+
+    const getUrl = () => {
+      console.log(`http://localhost:8080/webpages?url=${trimHref}`)
+      fetch(`http://localhost:8080/webpages?url=${trimHref}`)
+      .then(res => res.json())
+      .then(link => console.log(link[0]))
+    }
+
+    useEffect(() => {
+      getUrl()
+    }, [hoverHref])
 
     $(document).ready(function(){
         // $("a").hover(function(){
@@ -19,6 +33,8 @@ const HoverFunction = () => {
                 // $("div#pop-up").append("<span id='txt_name'><br>" + $(this).attr("href") + "</span>")
                 $('div#pop-up').show();
                 setHoverHref($(this).attr("href"))
+                console.log($(this).attr("href"))
+
             
               //.css('top', e.pageY + moveDown)
               //.css('left', e.pageX + moveLeft)
