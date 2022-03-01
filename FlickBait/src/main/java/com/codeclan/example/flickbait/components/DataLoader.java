@@ -35,13 +35,13 @@ public class DataLoader implements ApplicationRunner {
         WebPage soundCloud = new WebPage("soundcloud.com/kleyna");
         webPageRepository.save(soundCloud);
 
-        WebPage guardian = new WebPage("theguardian.com/uk");
+        WebPage guardian = new WebPage("www.theguardian.com/uk");
         webPageRepository.save(guardian);
 
         WebPage mal = new WebPage("myanimelist.net/");
         webPageRepository.save(mal);
 
-        WebPage newGrounds = new WebPage("newgrounds.com/");
+        WebPage newGrounds = new WebPage("www.newgrounds.com/");
         webPageRepository.save(newGrounds);
 
         WebPage stackOverflow = new WebPage("stackoverflow.com/");
@@ -49,7 +49,6 @@ public class DataLoader implements ApplicationRunner {
 
         WebPage messenger = new WebPage("messenger.com/");
         webPageRepository.save(messenger);
-
 
         Vote jackV1 = new Vote(true, soundCloud);
         voteRepository.save(jackV1);
@@ -201,12 +200,12 @@ public class DataLoader implements ApplicationRunner {
         messenger.addVote(sarahV6);
         webPageRepository.save(messenger);
 
-        Comment jackComment1 = new Comment("Johnny", "Did you know that I make music?", soundCloud);
+        Comment jackComment1 = new Comment("Did you know that I make music?", soundCloud);
         commentRepository.save(jackComment1);
         soundCloud.addComment(jackComment1);
         webPageRepository.save(soundCloud);
 
-        Comment tamerComment1 = new Comment("tamer", "I am not a loser", guardian);
+        Comment tamerComment1 = new Comment("I am not a loser", guardian);
         commentRepository.save(tamerComment1);
         guardian.addComment(tamerComment1);
         webPageRepository.save(guardian);

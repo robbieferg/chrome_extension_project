@@ -120,7 +120,6 @@ public class WebPage {
         else {
             this.downvotes += 1;
         }
-
     }
 
 //    public double calculateAverageRating() {

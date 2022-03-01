@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import com.codeclan.example.flickbait.components.DataLoader;
 
 @Entity
 @Table(name = "comments")
@@ -13,9 +14,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "author")
-    private String author;
 
     @Column(name = "text")
     private String text;
@@ -28,8 +26,7 @@ public class Comment {
     @JoinColumn(name = "web_page_id")
     private WebPage webPage;
 
-    public Comment(String author, String text, WebPage webPage) {
-        this.author = author;
+    public Comment(String text, WebPage webPage) {
         this.text = text;
         this.dateAndTime = new Date();
         this.webPage = webPage;
@@ -44,14 +41,6 @@ public class Comment {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getText() {

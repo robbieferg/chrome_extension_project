@@ -45,7 +45,6 @@ public class Vote {
         isUpVote = upVote;
     }
 
-
     public WebPage getWebPage() {
         return webPage;
     }
