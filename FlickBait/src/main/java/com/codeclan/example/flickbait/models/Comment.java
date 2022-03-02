@@ -19,16 +19,16 @@ public class Comment {
     private String text;
 
     @Column(name = "date_and_time")
-    private Date dateAndTime;
+    private String dateAndTime;
 
     @JsonIgnoreProperties({"comments"})
     @ManyToOne
     @JoinColumn(name = "web_page_id")
     private WebPage webPage;
 
-    public Comment(String text, WebPage webPage) {
+    public Comment(String text, String dateAndTime, WebPage webPage) {
         this.text = text;
-        this.dateAndTime = new Date();
+        this.dateAndTime = dateAndTime;
         this.webPage = webPage;
     }
 
@@ -51,11 +51,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Date getDateAndTime() {
+    public String getDateAndTime() {
         return dateAndTime;
     }
 
-    public void setDateAndTime(Date dateAndTime) {
+    public void setDateAndTime(String dateAndTime) {
         this.dateAndTime = dateAndTime;
     }
 

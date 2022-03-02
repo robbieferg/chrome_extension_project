@@ -1,11 +1,38 @@
 div#pop-up {
     display: none;
     position: absolute;
+    height: 100px;
     width: 280px;
     padding: 10px;
-    background: #eeeeee;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(.2rem);
+
     color: #000000;
-    border: 1px solid #1a1a1a;
+    border: 1px solid white;
     font-size: 90%;
-    z-index: 100;
+    z-index: 1000;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  #top-bar {
+    margin: 0;
+    background-color: white;
+  }
+
+  #flickbait-text {
+    height: 15px;
+    width: auto;
+  }
+
+  #hover-logo {
+    height: 15px;
+    width: auto;
+    padding-right: 5px;
+  }
+
+  p {
+    margin: 0;
+
   }
