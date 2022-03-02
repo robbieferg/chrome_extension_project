@@ -61,8 +61,8 @@ const HoverFunction = ({logo, text}) => {
               <img id="hover-logo" src={logo} alt="flickbait-logo" />
               <img id="flickbait-text" src={text} alt="flickbait" />
             </div>
-              <p>Total votes: {numberOfVotes}</p>
-              <p>Avg. Rating: {percentageRating}%</p>
+              <p className='baby-boys'>Total votes: {numberOfVotes}</p>
+              <p className='baby-boys'>Avg. Rating: {percentageRating}%</p>
               {/* <p>Current Href:{hoverHref}</p> */}
           </div>
     </>
