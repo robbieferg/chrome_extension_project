@@ -18,6 +18,7 @@ const InfoContainer = () => {
   const [votes, setVotes] = useState([]);
   const [selectedWebPage, setSelectedWebPage] = useState([]);
   const [latestVote, setLatestVote] = useState([]);
+  const [isToggled, setIsToggled] = useState(false);
   
   let url = window.location.host;
   let urlLink = window.location.pathname;
@@ -123,18 +124,30 @@ const InfoContainer = () => {
       handleWebPagePut(selectedWebPage)
     },[latestVote])
     
+    const buttonText = isToggled ? 'hide' : 'show'
     
   return (
       <>
+
       <HoverFunction/>
-        <div className="navbar-container"> 
-          {selectedWebPage && <Rating selectedWebPage={selectedWebPage}
-          votes={votes} url={fullUrl}/>}
-            <div className="form-container">
-              <Form url={url} urlLink={urlLink} handleFullPost={handleFullPost}
-              handleComment={handleCommentPost} selectedWebPage={selectedWebPage}/>
-            </div>
+
+        <div>
+        { isToggled ?
+          <div className="navbar-container">
+
+            {selectedWebPage && <Rating selectedWebPage={selectedWebPage} votes={votes} url={fullUrl}/>}
+
+              <div className="form-container">
+                <Form url={url} urlLink={urlLink} handleFullPost={handleFullPost}
+                handleComment={handleCommentPost} selectedWebPage={selectedWebPage}/>
+              </div>
+
+          </div>
+          : null
+        }
         </div>
+
+        <button onClick={() => setIsToggled(!isToggled)}>{buttonText}</button>
       </>
   )
 }
