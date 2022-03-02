@@ -1,12 +1,12 @@
 body {
-    background-color: dimgray;
+    background-color: aquamarine;
 }
 
 .navbar-container {    
     height: 50px;
-    background: rgb(238,156,167);
-    background: linear-gradient(90deg, rgba(238,156,167,1) 0%, rgba(255,221,225,1) 100%);
-    color: aliceblue;
+    background: #ec61d3;
+    background: linear-gradient(90deg, #00ebf0 0%, #00f3b0 100%);
+    color: white;
     z-index: 2;
 
     display: flex;
@@ -24,4 +24,9 @@ body {
     padding: 5px;
     border: 0.15rem white solid;
     border-radius: 5px;
+}
+
+#logo {
+    height: 45px;
+    width: auto;
 }
